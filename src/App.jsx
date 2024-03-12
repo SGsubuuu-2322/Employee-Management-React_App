@@ -1,7 +1,10 @@
 // import React from 'react'
 
 // import Home from "./Components/Home";
-import Routing from "./Utils/Routing";
+import { Route, Routes } from "react-router-dom";
+// import Routing from "./Utils/Routing";
+import { PublicRoutes } from "./Routes/PublicRoutes";
+import { AuthRoutes } from "./Routes/AuthRoutes";
 // import UserProfile from "./Components/UserProfile";
 
 // import Login from "./Components/Login";
@@ -11,8 +14,15 @@ import Routing from "./Utils/Routing";
 
 const App = () => {
   return (
-    <div className="w-full h-screen bg-zinc-100">
-      <Routing />
+    <div className="w-full h-screen">
+      <Routes>
+        {PublicRoutes.map((val, i) => {
+          return <Route key={i} path={val.path} element={<val.element />} />;
+        })}
+        {AuthRoutes.map((val, i) => {
+          return <Route key={i} path={val.path} element={<val.element />} />;
+        })}
+      </Routes>
     </div>
   );
 };
