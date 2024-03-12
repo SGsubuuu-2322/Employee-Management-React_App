@@ -1,7 +1,7 @@
 // import React from 'react'
 
 // import Home from "./Components/Home";
-import Routing from "./Components/Routing";
+import Routing from "./Utils/Routing";
 // import UserProfile from "./Components/UserProfile";
 
 // import Login from "./Components/Login";
