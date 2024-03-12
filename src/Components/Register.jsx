@@ -1,24 +1,33 @@
 // import React from 'react'
 
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { register, handleSubmit, reset } = useForm();
   const allUsers = localStorage.getItem("allUsers");
+  const users = JSON.parse(allUsers);
+  const Navigate = useNavigate();
 
   const onSubmit = (data) => {
-    if (data.password1 === data.password2) {
-      if (allUsers === null) {
-        localStorage.setItem("allUsers", JSON.stringify([data]));
+    const user = users.find((user) => user.email === data.email);
+    if (user === undefined) {
+      if (data.password1 === data.password2) {
+        if (allUsers === null) {
+          localStorage.setItem("allUsers", JSON.stringify([data]));
+          Navigate("/login");
+        } else {
+          users.push(data);
+          localStorage.setItem("allUsers", JSON.stringify(users));
+          Navigate("/login");
+        }
       } else {
-        const users = JSON.parse(allUsers);
-        users.push(data);
-        localStorage.setItem("allUsers", JSON.stringify(users));
+        alert("Passwords do not match");
       }
     } else {
-      alert("Passwords do not match");
+      alert("User already exists");
     }
+
     reset();
   };
 
@@ -37,6 +46,7 @@ const Register = () => {
             {...register("name")}
             type="text"
             name="name"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
@@ -46,6 +56,7 @@ const Register = () => {
             {...register("username")}
             type="text"
             name="username"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
@@ -55,6 +66,7 @@ const Register = () => {
             {...register("email")}
             type="email"
             name="email"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
@@ -64,6 +76,7 @@ const Register = () => {
             {...register("designation")}
             type="text"
             name="designation"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
@@ -73,6 +86,7 @@ const Register = () => {
             {...register("password1")}
             type="password"
             name="password1"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
@@ -82,6 +96,7 @@ const Register = () => {
             {...register("password2")}
             type="password"
             name="password2"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
