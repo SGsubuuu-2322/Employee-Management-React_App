@@ -1,9 +1,10 @@
 // import React from 'react'
 
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const Navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
   const allUsers = localStorage.getItem("allUsers");
   const loggedInUser = localStorage.getItem("loggedInUser");
@@ -15,12 +16,12 @@ const Login = () => {
     if (user !== undefined) {
       if (user.password1 === data.password) {
         if (loggedInUser === null) {
-          localStorage.setItem("loggedInUser", JSON.stringify([user]));
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
+          Navigate("/");
         } else {
-          let allLoggedInUsers = JSON.parse(loggedInUser);
-          allLoggedInUsers.push(user);
-          console.log(user);
-          localStorage.setItem("loggedInUser", JSON.stringify(users));
+          localStorage.removeItem("loggedInUser");
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
+          Navigate("/");
         }
       } else {
         alert("Password is incorrect");
@@ -46,6 +47,7 @@ const Login = () => {
             {...register("email")}
             type="email"
             name="email"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
@@ -56,6 +58,7 @@ const Login = () => {
             {...register("password")}
             type="password"
             name="password"
+            required
             className="border w-[80%] mx-auto mb-2"
           />
         </div>
