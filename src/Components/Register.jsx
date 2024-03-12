@@ -18,9 +18,6 @@ const Register = () => {
     } else {
       alert("Passwords do not match");
     }
-
-    // const temp =
-    // localStorage.setItem;
     reset();
   };
 

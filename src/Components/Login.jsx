@@ -4,8 +4,29 @@ import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
+  const allUsers = localStorage.getItem("allUsers");
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const users = JSON.parse(allUsers);
+  // console.log(users);
   const onSubmit = (data) => {
-    console.log(data);
+    const user = users.find((user) => user.email === data.email);
+    // console.log(user);
+    if (user !== undefined) {
+      if (user.password1 === data.password) {
+        if (loggedInUser === null) {
+          localStorage.setItem("loggedInUser", JSON.stringify([user]));
+        } else {
+          let allLoggedInUsers = JSON.parse(loggedInUser);
+          allLoggedInUsers.push(user);
+          console.log(user);
+          localStorage.setItem("loggedInUser", JSON.stringify(users));
+        }
+      } else {
+        alert("Password is incorrect");
+      }
+    } else {
+      alert("Your username is incorrect...");
+    }
     reset();
   };
 
@@ -18,15 +39,6 @@ const Login = () => {
         className="register-card w-1/4 bg-secondary border shadow p-5"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="input-container flex flex-col">
-          <label htmlFor="name">Username: </label>
-          <input
-            {...register("username")}
-            type="text"
-            name="username"
-            className="border w-[80%] mx-auto mb-2"
-          />
-        </div>
         <div className="input-container flex flex-col">
           <label htmlFor="email">Email: </label>
           <input
