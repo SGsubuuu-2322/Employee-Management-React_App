@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 // import Routing from "./Utils/Routing";
 import { PublicRoutes } from "./Routes/PublicRoutes";
 import { AuthRoutes } from "./Routes/AuthRoutes";
+import Protected from "./Routes/Protected";
 // import UserProfile from "./Components/UserProfile";
 
 // import Login from "./Components/Login";
@@ -20,7 +21,13 @@ const App = () => {
           return <Route key={i} path={val.path} element={<val.element />} />;
         })}
         {AuthRoutes.map((val, i) => {
-          return <Route key={i} path={val.path} element={<val.element />} />;
+          return (
+            <Route
+              key={i}
+              path={val.path}
+              element={<Protected Component={val.element} />}
+            />
+          );
         })}
       </Routes>
     </div>
