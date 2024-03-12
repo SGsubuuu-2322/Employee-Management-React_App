@@ -1,6 +1,15 @@
 // import React from 'react'
 
+import { useNavigate } from "react-router-dom";
+
 const UserProfile = () => {
+  const Navigate = useNavigate();
+  //   const id = useParams();
+  const handleClick = () => {
+    Navigate(-1);
+  };
+
+  //   const userData =
   return (
     <div className="w-full h-full bg-zinc-100 flex flex-col items-center justify-center">
       <h1 className="text-2xl font-semibold text-primary mb-5">User_Profile</h1>
@@ -43,6 +52,12 @@ const UserProfile = () => {
           </p>
         </div>
       </div>
+      <button
+        onClick={handleClick}
+        className="px-2 py-2 border shadow bg-secondary text-primary rounded-lg mt-4"
+      >
+        Go Back
+      </button>
     </div>
   );
 };
