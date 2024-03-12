@@ -1,15 +1,28 @@
 // import React from 'react'
 
+import { useForm } from "react-hook-form";
+
 const Register = () => {
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    reset();
+  };
+
   return (
     <div className="register-container w-full h-full flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold text-primary border shadow mb-4 p-3 rounded-md">
         Registration Form
       </h1>
-      <form className="register-card w-1/4 bg-secondary border shadow p-5">
+      <form
+        className="register-card w-1/4 bg-secondary border shadow p-5"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="input-container flex flex-col">
           <label htmlFor="name">Name: </label>
           <input
+            {...register("name")}
             type="text"
             name="name"
             className="border w-[80%] mx-auto mb-2"
@@ -18,6 +31,7 @@ const Register = () => {
         <div className="input-container flex flex-col">
           <label htmlFor="name">Username: </label>
           <input
+            {...register("username")}
             type="text"
             name="username"
             className="border w-[80%] mx-auto mb-2"
@@ -26,6 +40,7 @@ const Register = () => {
         <div className="input-container flex flex-col">
           <label htmlFor="email">Email: </label>
           <input
+            {...register("email")}
             type="email"
             name="email"
             className="border w-[80%] mx-auto mb-2"
@@ -34,6 +49,7 @@ const Register = () => {
         <div className="input-container flex flex-col">
           <label htmlFor="name">Designation: </label>
           <input
+            {...register("designation")}
             type="text"
             name="designation"
             className="border w-[80%] mx-auto mb-2"
@@ -42,6 +58,7 @@ const Register = () => {
         <div className="input-container flex flex-col">
           <label htmlFor="name">Password: </label>
           <input
+            {...register("password1")}
             type="password"
             name="password1"
             className="border w-[80%] mx-auto mb-2"
@@ -50,6 +67,7 @@ const Register = () => {
         <div className="input-container flex flex-col">
           <label htmlFor="name">Re-Enter Password: </label>
           <input
+            {...register("password2")}
             type="password"
             name="password2"
             className="border w-[80%] mx-auto mb-2"
