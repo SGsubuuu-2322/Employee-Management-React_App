@@ -1,6 +1,9 @@
 // import React from 'react'
 
-import Login from "./Components/Login";
+// import Home from "./Components/Home";
+import UserProfile from "./Components/UserProfile";
+
+// import Login from "./Components/Login";
 // import Register from "./Components/Register";
 
 // import Nav from "./Components/Nav";
@@ -8,7 +11,7 @@ import Login from "./Components/Login";
 const App = () => {
   return (
     <div className="w-full h-screen bg-zinc-100">
-      <Login />
+      <UserProfile />
     </div>
   );
 };
