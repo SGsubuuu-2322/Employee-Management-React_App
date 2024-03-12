@@ -4,9 +4,23 @@ import { useForm } from "react-hook-form";
 
 const Register = () => {
   const { register, handleSubmit, reset } = useForm();
+  const allUsers = localStorage.getItem("allUsers");
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (data.password1 === data.password2) {
+      if (allUsers === null) {
+        localStorage.setItem("allUsers", JSON.stringify([data]));
+      } else {
+        const users = JSON.parse(allUsers);
+        users.push(data);
+        localStorage.setItem("allUsers", JSON.stringify(users));
+      }
+    } else {
+      alert("Passwords do not match");
+    }
+
+    // const temp =
+    // localStorage.setItem;
     reset();
   };
 
