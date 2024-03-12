@@ -1,15 +1,20 @@
 // import React from 'react'
 
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { UsersContext } from "../Utils/Context";
 
 const UserProfile = () => {
+  const { users } = useContext(UsersContext);
   const Navigate = useNavigate();
-  //   const id = useParams();
+  const id = useParams();
   const handleClick = () => {
     Navigate(-1);
   };
 
-  //   const userData =
+  const userData = users[id.id];
+  //   console.log(id.id);
+  //   console.log(userData);
   return (
     <div className="w-full h-full bg-zinc-100 flex flex-col items-center justify-center">
       <h1 className="text-2xl font-semibold text-primary mb-5">User_Profile</h1>
@@ -27,18 +32,18 @@ const UserProfile = () => {
         <div className="details w-full h-3/4 bg-secondary mt-4 flex flex-col items-center">
           <h2 className="text-2xl font-semibold text-primary">
             Name:{" "}
-            <span className="text-xl font-medium text-zinc-400">John Doe</span>
+            <span className="text-xl font-medium text-zinc-400">{`${userData.name.firstname} ${userData.name.lastname}`}</span>
           </h2>
           <h3 className="text-2xl font-semibold text-primary">
             Email:{" "}
             <span className="text-xl font-medium text-zinc-400">
-              abc@gmail.com
+              {userData.email}
             </span>{" "}
           </h3>
           <h3 className="text-2xl font-semibold text-primary">
             Designation:{" "}
             <span className="text-xl font-medium text-zinc-400">
-              Software Developer
+              {userData.Designation}
             </span>
           </h3>
 
