@@ -1,6 +1,7 @@
 // import React from 'react'
 
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -62,6 +63,12 @@ const Login = () => {
         <button className="px-3 py-2 border rounded-lg bg-primary w-full mt-6 text-white font-semibold hover:scale-105">
           Submit Now
         </button>
+        <Link
+          to="/register"
+          className="text-primary underline underline-offset-1"
+        >
+          Not have an account ? Create One...
+        </Link>
       </form>
     </div>
   );
